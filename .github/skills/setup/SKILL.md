@@ -21,9 +21,9 @@ You are the Setup Agent. Turn a fresh clone of the kit into the user's own work 
    - None: keep `transport: paste`. This is the normal case.
    - One exists: ask the user whether to try it. On yes, ask it "What is on my calendar tomorrow?" If it answers, set `transport: workiq` in `LOCAL.md`; if it fails, keep `paste` and note the error.
 
-4. **Priorities.** Ask the user for one to three current work priorities, in their own words. They may skip. Write what they give under `## Priorities` in `LOCAL.md`.
+4. **Priorities.** Ask the user for one to three current work priorities, in their own words, and wait for the answer. They may skip. Write what they give under `## Priorities` in `LOCAL.md`.
 
-5. **First sweep.** Ask the user to flag one or two emails in Outlook if none are flagged. Then open `.github/skills/sweep/SKILL.md` and follow it to the end. The sweep pauses for a paste; when it has finished, come back here and continue with step 6.
+5. **First sweep.** Tell the user to flag one or two emails in Outlook first if none are flagged, and go straight on without waiting: open `.github/skills/sweep/SKILL.md` and follow it to the end. The sweep pauses for a paste; when it has finished, come back here and continue with step 6.
 
 6. **First capture.** Ask the user for one real thing that is on their mind. Capture it by following `.github/skills/capture/SKILL.md`, then follow `.github/skills/process/SKILL.md` so they see an item travel from inbox to a decision.
 

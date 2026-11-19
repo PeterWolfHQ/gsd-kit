@@ -23,8 +23,8 @@ You are the Calendar Sweep Agent. Scan the coming days of the user's work calend
    1. **Recurring** (`RECURRING` is YES): look up its title in `calendar/recurring-policies.md`.
       - `action-item`: capture this occurrence (once; the key makes it idempotent).
       - `ignore`, `night-before`, `free-window`: skip here. The last two are `/next`'s job at the right moment.
-      - **Not in the policy file**: hold it aside. After the receipt, ask the user to classify ALL unknown recurring events in one numbered list, then append one row per answer to the policy file and commit it.
-   2. **Already in GSD**: skip silently. Search the whole repo, `archive/` included, for the event's LINK (when it has one) and its key. Also check for an existing item that plainly covers it (a trip project that already holds this flight). The repo is the ledger: a hit anywhere means seen.
+      - **Not in the policy file**: hold it aside. After the receipt, ask the user to classify ALL unknown recurring events in one numbered list, then append one row per answer to the policy file and commit it as `calsweep: N recurring policies added`.
+   2. **Already in GSD**: skip silently. Search the whole repo, `archive/` included, for the event's LINK (when it has one) and its key. The repo is the ledger: a hit anywhere means seen. Also look for an open item or project that plainly covers the event's prep. If the event adds nothing to it, skip. If it adds a date, a place or a link that item lacks, capture it and name the item it belongs to in the first line; `/process` merges it.
    3. **Judge prep-need.** Capture if the event plausibly needs preparation:
       - something the user presents, demos or leads
       - reviews and readouts (design, architecture, budget, performance, steering)
