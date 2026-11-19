@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local shims for trying the kit under other agents
+/CLAUDE.md
+/.claude/
