@@ -1,6 +1,6 @@
 # LOCAL: facts about this machine
 
-`/setup` copies this file to `LOCAL.md`. The kit never overwrites `LOCAL.md`, so edit it freely.
+The kit ships this as `LOCAL.example.md` and `/setup` copies it to `LOCAL.md`. Kit updates never touch `LOCAL.md`, so edit it freely.
 
 ## Settings
 

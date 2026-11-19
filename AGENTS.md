@@ -90,6 +90,7 @@ Rules:
 - **Nothing is deleted.** "Trash" means `status: trashed` and a move to `archive/`. It covers junk, and duplicates merged into another item.
 - Moving a file between folders and updating `status` always happen together.
 - **`completed`** is set to today's date at the moment `status` becomes `done`. The status draft and wins log read it.
+- **`due`** is a date. If a time of day matters, say it in the first line of the body.
 - **`person`** names the one person an item involves, spelled the same way every time (full name). It is required when `context` is `@agenda`. `/agenda` reads it.
 - **Recurring items** (`recurrence` set) are *live* when `last_done` predates the current period, *resting* otherwise. Completing an occurrence updates `last_done`; the file stays put. Archive only when the chore itself ends. `/next` hides resting items.
 
@@ -106,7 +107,7 @@ Contexts are a fixed set. Never invent others.
 
 A project is any outcome that needs more than one action. Each lives in `projects/<slug>/`:
 
-- **`project.md`**: frontmatter `id`, `captured`, `status` (`next` while active, `someday` while parked, `done` when finished), and optionally `due` and `person`. The body is a `# Title`, one `**Outcome:**` line saying what done looks like, then notes.
+- **`project.md`**: frontmatter `id` (`YYYY-MM-DD-<slug>-project`), `captured`, `status` (`next` while active, `someday` while parked, `done` when finished), and optionally `due` and `person`. The body is a `# Title`, one `**Outcome:**` line saying what done looks like, then notes.
 - **`plan.md`**: a short numbered list of steps. Strike a step through when it is done.
 
 Rules:
@@ -138,9 +139,11 @@ When processing any item in `inbox/`, walk this exact decision tree:
    - **No:**
      - **Delegate it:** `waiting/` with `delegated_to` and `delegated_on` set. If the delegation needs an email or Teams message, draft it. Never send it.
      - **Defer it:**
-       - Must happen on a specific day or at a specific time: `calendar/` with `due` set
+       - Work that must be done on a specific day: `calendar/` with `due` set (a `context` is optional there)
        - Has a deadline but can be done any time before it: `next-actions/` with a `context` and `due`
        - Otherwise: `next-actions/` with a `context`
+
+**A meeting is not an item.** "Be at the vendor demo on Tuesday" belongs on the real calendar, not in this repo. If it is already there, trash the capture. If it is not, putting it there is a 2-minute item for the user; the agent never creates events. Only the *prep* for an event becomes an item.
 
 **Inbox zero is the goal of every processing session.** An item never goes back into `inbox/`. It gets a decision.
 
@@ -205,7 +208,7 @@ Settled design decisions. Do not relitigate without the user's say-so.
 - **Transport**: sweeps reach Outlook, Teams and the calendar by asking Microsoft 365 Copilot one prompt with a strict answer format. With `transport: paste` the user carries the prompt over and pastes the answer back. With `transport: workiq` the agent asks through the Work IQ tool. Same prompt either way.
 - **The repo is the ledger.** Every swept item carries a `Key:` line and, when there is one, a link. A search hit anywhere in the repo, `archive/` included, means "seen". No state file.
 - **Days versus deadlines**: `calendar/` is for things that must happen on a particular day. A deadline is a `due` date on a next action, so the work stays visible to `/next` before the day arrives.
-- **Real calendar events are never mirrored into files.** `calendar/` holds date-bound GSD items only. Recurring events get per-title policies in `calendar/recurring-policies.md`.
+- **Real calendar events are never mirrored into files.** A meeting you simply attend lives in Outlook and needs no item. `calendar/` holds date-bound work only. Recurring events get per-title policies in `calendar/recurring-policies.md`.
 - **Priorities, not values**: the decision lens for `/next` and `/review` is the `## Priorities` section of `LOCAL.md`, hand-written by the user. Empty means no lens. Priorities break ties; they never veto chores.
 - **Kit and machine**: `AGENTS.md` and the skills belong to the kit and are updated with `git pull kit main`. `LOCAL.md`, `calendar/recurring-policies.md` and every item belong to this machine. Nothing flows back to the kit.
 - **Reporting**: later. Keep frontmatter clean and consistent now so it is trivial then.

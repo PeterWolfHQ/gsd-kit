@@ -9,7 +9,7 @@ You are the Review Agent. Run the Weekly Review **in this exact order**. `AGENTS
 
 The **review period** runs from the last review to today. Get the last review's date with `git log -1 --grep="^review:" --format=%cs`, and use 7 days ago if there is none.
 
-Collect your questions as you go. You ask them all at once, in step 8.
+Collect your judgment questions as you go and ask them all at once, in step 8. The only earlier stops are the inbox (step 1) and the calendar paste (step 5).
 
 ## Procedure
 
@@ -41,13 +41,13 @@ Collect your questions as you go. You ask them all at once, in step 8.
 
    Leave out any line that has nothing to ask. If no questions remain, say so and go on without waiting. Then apply the answers. All file moves are a frontmatter update plus `git mv`, together.
 
-9. **Write the wins.** Append each confirmed win to `reference/wins.md` as one line, newest at the bottom. Create the file with a `# Wins` heading if it is missing:
+9. **Write the wins.** If the user confirmed none, write nothing. Otherwise append each confirmed win to `reference/wins.md` as one line, newest at the bottom, creating the file with a `# Wins` heading if it is missing:
    `- 2026-11-20: <the outcome in plain words>`
    Add ` (<project-slug>)` at the end when the item belongs to a project. If the user reported missed asks in step 8, add one dated line about it under `## Setup notes` in `LOCAL.md`.
 
 10. **Draft the status note.** Write `reference/status/YYYY-MM-DD-status.md` (today's date) with standard reference frontmatter (`id`, `captured`, `status: reference`) and four short sections, written for a manager who has two minutes:
     - **Done this week**: completed items from step 7, grouped by project, as outcomes.
-    - **Next week**: the next action of each active project, plus any other open action that is due next week or advances a `LOCAL.md` priority.
+    - **Next**: every open action due in the coming 7 days, the next action of each active project, and anything else that advances a `LOCAL.md` priority.
     - **Waiting on**: open `waiting/` items that matter, with who and how long.
     - **Risks and decisions needed**: stalled projects, slipping dates.
 

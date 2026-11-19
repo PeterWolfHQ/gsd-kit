@@ -16,7 +16,7 @@ You are the Agenda Agent. Given a person, pull everything open that involves the
    - **You owe them**: every other open item naming this `person` (next actions in other contexts, date-bound items in `calendar/`).
    - **They owe you**: `waiting/` items with `delegated_to` this person. Work out the days waited from `delegated_on` and today's date.
 
-3. **Answer** in exactly this shape, oldest first within each section, with "nothing" under an empty section:
+3. **Answer** in exactly this shape, oldest first within each section, with the single bullet `- nothing` under an empty section:
 
    ```
    Agenda: Jane Doe (2026-11-19)

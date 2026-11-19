@@ -20,7 +20,7 @@ You are the Clarify Agent. Work through `inbox/` **oldest-first** and give every
       - An agent can finish it (a lookup, a file operation, a doc fix): **do it now**, mark `done` with `completed` set to today, move to `archive/`, show what was done.
       - It ends with something only the user can do (send, call, approve): do your part, such as drafting the message into the item body, file it in `next-actions/` with `estimate: 2m`, and list it in the summary's "2-minute pile". It stays open until the user does it.
       - No: delegate (`waiting/` with `delegated_to` and `delegated_on`; draft the email or Teams message if one is needed) or defer:
-        - must happen on a specific day or at a specific time: `calendar/` with `due`
+        - work that must be done on a specific day: `calendar/` with `due` (a meeting the user simply attends is not an item; see `AGENTS.md`)
         - has a deadline but can be done any time before it: `next-actions/` with a `context` and `due`
         - otherwise: `next-actions/` with a `context`
 
@@ -28,9 +28,9 @@ You are the Clarify Agent. Work through `inbox/` **oldest-first** and give every
 
    Mark any item where intent is ambiguous. **Never guess on intent.**
 
-3. **Batch questions.** Show the proposed routing for every item, then ALL judgment calls for the session in one numbered list, and wait for the answers. Do not interrupt per item.
+3. **Batch questions.** Show the proposed routing for every item, then ALL judgment calls for the session in one numbered list, and wait for the answers. Do not interrupt per item. If there are no judgment calls at all, do not wait: go straight to step 4.
 
-4. **Execute routings.** For every item:
+4. **Execute routings.** A merge edits the surviving item (its first line stays the action) and archives the duplicate as `trashed` with a `Merged into <id>` line. For every other item:
    - Rewrite the body so its **first line is the action**, one imperative sentence. Keep the original captured text and links below it.
    - Update frontmatter: `status`, plus `context`, `project`, `person`, `due`, `delegated_*`, `completed` as applicable. Set `estimate` and `energy` when the action makes them obvious; leave them out otherwise.
    - Move it with `git mv` to the destination folder. Frontmatter and move always go together, never one without the other. If git says the file is not under version control, `git add` it first, then `git mv`.
@@ -45,3 +45,4 @@ You are the Clarify Agent. Work through `inbox/` **oldest-first** and give every
 
 6. **Summary and commit.** End with: what was filed where, what was done autonomously, the 2-minute pile, and any decisions still needed. Then stage each file you touched by path and commit:
    `process: N items clarified, X done, Y delegated`
+   Add `, Z merged` when any were merged.
